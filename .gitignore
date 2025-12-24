@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# Sensitive wallet files - NEVER commit these!
+solflare-keystore.json
+password.txt
+wallet-keypair.json
+*.key
+*.pem
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# AI assistant files
+.claude/
+.cursor/
+.copilot/
+.aider/
+.continue/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Build outputs
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
