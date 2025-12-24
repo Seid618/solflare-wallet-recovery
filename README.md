@@ -40,6 +40,8 @@ To use this recovery tool, you'll need two files from your Solflare wallet:
 
 ### 1. Keystore File and Password
 
+Access your legacy Solflare wallet at [https://legacy.solflare.com](https://legacy.solflare.com)
+
 When accessing your legacy Solflare wallet, you'll see a screen like this:
 
 ![Solflare Access Wallet Screen](docs/unlock-screen.png)
@@ -117,23 +119,6 @@ The tool will guide you through the following steps:
 #### Step 7: Final Transfer
 - Optionally transfer all funds to another address
 - Fee is automatically calculated and reserved
-
-## Project Structure
-
-```
-.
-├── script.js              # Main entry point
-├── lib/
-│   ├── utils.js          # Debug logging and prompt utilities
-│   ├── crypto.js         # Keystore decryption and signer creation
-│   ├── transaction.js    # Transaction signing and sending
-│   └── steps.js          # Workflow step functions
-├── docs/
-│   ├── unlock-screen.png # Guide for getting keystore/password
-│   └── copy-values.png   # Guide for finding wallet addresses
-├── package.json
-└── README.md
-```
 
 ## Security Notes
 
