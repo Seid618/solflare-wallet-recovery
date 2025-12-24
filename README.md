@@ -21,7 +21,7 @@ This tool helps you recover access to legacy Solflare wallets by decrypting keys
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/ThijMau/solflare-wallet-recovery.git
+git clone https://github.com/thijmau/solflare-wallet-recovery.git
 cd solflare-wallet-recovery
 ```
 
@@ -167,5 +167,5 @@ Tips are appreciated but never required. This tool is free and open source.
 ## Support
 
 If you encounter any issues or have questions:
-- Open an issue on [GitHub](https://github.com/ThijMau/solflare-wallet-recovery/issues)
+- Open an issue on [GitHub](https://github.com/thijmau/solflare-wallet-recovery/issues)
 - Ensure you never share your private keys or keystore files when seeking help

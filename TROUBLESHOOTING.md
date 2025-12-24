@@ -114,7 +114,7 @@ Your recovered keypair is saved in `wallet-keypair.json`. You can use the offici
 If your problem isn't listed here:
 
 1. **Check debug logs** - The tool outputs detailed debug information
-2. **Open an issue** on [GitHub](https://github.com/ThijMau/solflare-wallet-recovery/issues)
+2. **Open an issue** on [GitHub](https://github.com/thijmau/solflare-wallet-recovery/issues)
 3. **Important:** Never share your keystore file, password, or private keys when asking for help
 
 ## Security Reminder

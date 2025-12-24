@@ -27,7 +27,7 @@
   "license": "GPL-3.0",
   "funding": {
     "type": "individual",
-    "url": "https://github.com/ThijMau/solflare-wallet-recovery#support-this-project"
+    "url": "https://github.com/thijmau/solflare-wallet-recovery#support-this-project"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -42,10 +42,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ThijMau/solflare-wallet-recovery.git"
+    "url": "https://github.com/thijmau/solflare-wallet-recovery.git"
   },
   "bugs": {
-    "url": "https://github.com/ThijMau/solflare-wallet-recovery/issues"
+    "url": "https://github.com/thijmau/solflare-wallet-recovery/issues"
   },
-  "homepage": "https://github.com/ThijMau/solflare-wallet-recovery#readme"
+  "homepage": "https://github.com/thijmau/solflare-wallet-recovery#readme"
 }
