@@ -117,13 +117,7 @@ If your problem isn't listed here:
 
 1. **Check debug logs** - The tool outputs detailed debug information
 2. **Open an issue** on [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues)
-3. **Important:** Never share your keystore file, password, or private keys when asking for help
 
 ## Security Reminder
 
-> ⚠️ **If you've successfully recovered your keypair:**
-> - The `wallet-keypair.json` file contains your private key
-> - Store it securely
-> - Never share it
-> - Consider transferring funds to a new, secure wallet
-> - Delete sensitive files after successful recovery
+> **If you've successfully recovered your keypair:** The `wallet-keypair.json` file contains your private key. Store it securely and consider transferring funds to a new, secure wallet.

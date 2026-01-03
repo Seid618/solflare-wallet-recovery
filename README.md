@@ -4,7 +4,7 @@
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
-[![Version](https://img.shields.io/badge/version-1.1.1-orange)](package.json)
+[![Version](https://img.shields.io/badge/version-1.1.2-orange)](package.json)
 [![Security Audit](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml/badge.svg)](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
 
 ---
@@ -15,7 +15,6 @@
 - [Quick Start](#quick-start)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
 - [Setup](#setup)
   - [Getting Your Keystore and Password](#getting-your-keystore-and-password)
   - [Finding Your Addresses](#finding-your-addresses)
@@ -38,11 +37,11 @@
 
 This tool solves common problems with legacy Solflare wallets:
 
-- ✅ Locked out of legacy Solflare wallet
-- ✅ Can't access Solflare keystore file
-- ✅ Need to recover funds from [https://legacy.solflare.com](https://legacy.solflare.com)
-- ✅ Unable to withdraw staked SOL from old accounts
-- ✅ Migrating from legacy Solflare to modern wallet
+- Locked out of legacy Solflare wallet
+- Can't access Solflare keystore file
+- Need to recover funds from [https://legacy.solflare.com](https://legacy.solflare.com)
+- Unable to withdraw staked SOL from old accounts
+- Migrating from legacy Solflare to modern wallet
 
 ---
 
@@ -70,12 +69,12 @@ This tool provides a complete recovery and retrieval solution:
 
 | Feature | Description |
 |---------|-------------|
-| 🔐 **Keystore Decryption** | Decrypt legacy Solflare keystore files using your password |
-| 💰 **Balance Checking** | View wallet and stake account balances |
-| 💸 **Stake Withdrawal** | Unstake and withdraw SOL from multiple stake accounts |
-| 🔄 **Fund Transfer** | Transfer recovered funds to a new wallet |
-| 🤖 **CLI Automation** | Scriptable with command-line flags for batch recovery |
-| 📝 **Interactive Mode** | Step-by-step guided recovery process |
+| **Keystore Decryption** | Decrypt legacy Solflare keystore files using your password |
+| **Balance Checking** | View wallet and stake account balances |
+| **Stake Withdrawal** | Unstake and withdraw SOL from multiple stake accounts |
+| **Fund Transfer** | Transfer recovered funds to a new wallet |
+| **CLI Automation** | Scriptable with command-line flags for batch recovery |
+| **Interactive Mode** | Step-by-step guided recovery process |
 
 ---
 
@@ -89,24 +88,11 @@ Before you begin, ensure you have:
 
 ---
 
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/thijmau/solflare-wallet-recovery.git
-cd solflare-wallet-recovery
-
-# Install dependencies
-npm install
-```
-
----
-
 ## Setup
 
 ### Getting Your Keystore and Password
 
-> 💡 **Example files available:** Check `docs/` directory for sample file formats
+> **Example files available:** Check `docs/` directory for sample file formats
 > - `docs/solflare-keystore.example.json`
 > - `docs/password.example.txt`
 
@@ -133,11 +119,11 @@ solflare-wallet-recovery/
 └── ...
 ```
 
-> 📝 **Note:** You can use different filenames/paths, but you'll need to specify them when prompted or via CLI flags.
+> **Note:** You can use different filenames/paths, but you'll need to specify them when prompted or via CLI flags.
 
 ### Finding Your Addresses
 
-Once logged into [https://legacy.solflare.com](https://legacy.solflare.com), you can find:
+Once logged into legacy Solflare, you can find:
 
 ![Solflare Wallet Dashboard](docs/copy-values.png)
 
@@ -160,13 +146,13 @@ node script.js
 ```
 
 **Process flow:**
-1. ✅ **File Input** - Provide keystore and password file paths
-2. ✅ **Decryption** - Keystore is decrypted and verified
-3. ✅ **Connection** - Connect to Solana network
-4. ✅ **Balance Check** - View your wallet balance
-5. ✅ **Stake Accounts** - Add stake account addresses
-6. ✅ **Withdrawals** - Optionally withdraw from stake accounts
-7. ✅ **Transfer** - Optionally transfer all funds to new wallet
+1. **File Input** - Provide keystore and password file paths
+2. **Decryption** - Keystore is decrypted and verified
+3. **Connection** - Connect to Solana network
+4. **Balance Check** - View your wallet balance
+5. **Stake Accounts** - Add stake account addresses
+6. **Withdrawals** - Optionally withdraw from stake accounts
+7. **Transfer** - Optionally transfer all funds to new wallet
 
 <details>
 <summary><strong>Advanced: CLI Flags (Non-Interactive Mode)</strong></summary>
@@ -234,19 +220,9 @@ node script.js --help
 > ⚠️ **CRITICAL: This tool handles sensitive cryptographic material (private keys).**
 
 **Before using with real funds:**
-- Read the complete [Security Policy](SECURITY.md)
+- Review the complete [Security Policy](SECURITY.md)
 - Review [automated security audit results](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
-- Understand the risks of external dependencies and RPC endpoints
-- Test with small amounts first
-
-**Quick Security Checklist:**
-- ✅ Verify you're using the official repository
-- ✅ Run `npm audit` locally before use
-- ✅ Never share your keystore or password
-- ✅ Review all transaction addresses before confirming
-- ✅ Keep backups in secure locations
-
-**For comprehensive security information, dependency risks, and best practices, see [SECURITY](SECURITY.md)**
+- Run `npm audit` locally and test with small amounts first
 
 ---
 
@@ -254,17 +230,15 @@ node script.js --help
 
 Having issues? Check these resources:
 
-- 📖 [TROUBLESHOOTING](TROUBLESHOOTING.md) - Common problems and solutions
+- [TROUBLESHOOTING](TROUBLESHOOTING.md) - Common problems and solutions
   - Decryption errors
   - Connection issues
   - Transaction failures
   - File format problems
 
-- ❓ [FAQ](FAQ.md) - Frequently asked questions
+- [FAQ](FAQ.md) - Frequently asked questions
 
-- 🐛 [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues) - Report bugs or ask for help
-
-> **⚠️ Security Reminder:** Never share private keys or keystore files when seeking help!
+- [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues) - Report bugs or ask for help
 
 ---
 
@@ -288,7 +262,6 @@ Contributions are welcome!
 
 - For major changes, open an issue first to discuss
 - Submit Pull Requests for improvements
-- Report bugs via [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues)
 
 ### Related Resources
 
@@ -310,20 +283,12 @@ Contributions are welcome!
 
 The author is NOT responsible for loss of funds, vulnerabilities in dependencies, or issues with external services. You are responsible for auditing code, verifying transactions, and securing your keys.
 
-**For detailed disclaimers and security considerations, see [SECURITY](SECURITY.md)**
-
----
-
-## Keywords
-
-`solflare-wallet-recovery` `solflare-keystore-decrypt` `legacy-solflare-wallet` `solana-wallet-recovery` `solflare-funds-recovery` `solflare-stake-withdrawal` `solflare-locked-out` `legacy-solflare-recovery` `solana-staking-recovery` `solflare-migration-tool`
-
 ---
 
 <div align="center">
 
-**⭐ Star this repo if it helped you recover your funds!**
+**Star this repo if it helped you recover your funds!**
 
-Made with ❤️ by [Thijmen Maus](https://thijmau.dev)
+Made by [Thijmen Maus](https://thijmau.dev)
 
 </div>

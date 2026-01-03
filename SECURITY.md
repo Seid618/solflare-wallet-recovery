@@ -38,8 +38,8 @@ This repository includes automated security auditing via GitHub Actions:
 
 ### Important Warnings
 
-| ⚠️ Warning | Details |
-|-----------|---------|
+| Warning | Details |
+|---------|---------|
 | **Private Keys** | This tool handles sensitive cryptographic material |
 | **Verify Source** | Always verify you're using the official repository |
 | **Never Share** | Never share keystore, password, or generated `wallet-keypair.json` |
@@ -139,7 +139,6 @@ Before using this tool with significant funds:
    - Test with small amounts first
    - Review all addresses carefully before confirming
    - Keep this tool and its dependencies updated
-   - Never share your keystore, password, or recovered private keys
 
 6. **Backup Strategy**
    - Keep multiple secure backups of your keystore
@@ -163,18 +162,13 @@ This tool:
 > **NO WARRANTY:** This software is provided "as is", without warranty of any kind, express or implied.
 
 **The author is NOT responsible for:**
-- Any loss of funds or assets
-- Vulnerabilities in third-party dependencies or services
-- Issues arising from external RPC endpoints or blockchain services
+- Loss of funds, vulnerabilities in dependencies, or issues with external services
 - Security breaches in npm packages or supply chain attacks
-- Any damages resulting from the use or misuse of this software
+- Any damages resulting from use or misuse of this software
 
 **Your Responsibilities:**
-- Verify all transactions before confirming them
-- Audit the code and dependencies yourself
-- Understand the risks of using third-party services
-- Keep your keystore and passwords secure
-- Use appropriate security measures for your situation
+- Audit the code and dependencies yourself before use
+- Understand the risks of third-party services and verify all transactions
 
 **This tool handles sensitive cryptographic material. If you are uncomfortable with any aspect of its operation or dependencies, do not use it with real funds.**
 

@@ -7,13 +7,12 @@ Common questions about the Solflare Wallet Recovery Tool.
 ## General Questions
 
 ### What is this tool for?
-This tool helps you recover access to legacy Solflare wallets by decrypting keystore files. It's specifically designed for users who have a Solflare keystore file from the legacy version ([https://legacy.solflare.com](https://legacy.solflare.com)) and need to access their funds, withdraw staked SOL, or migrate to a new wallet.
+This tool helps you recover access to legacy Solflare wallets by decrypting keystore files. It's specifically designed for users who have a Solflare keystore file from the legacy version of Solflare and need to access their funds, withdraw staked SOL, or migrate to a new wallet.
 
 ### Is this safe to use?
 Yes, this is open-source software that runs entirely on your local machine. You can review all the code before running it. Your private keys never leave your computer, and no data is sent to external servers. However, as with any tool that handles private keys, you should:
 - Review the source code
 - Verify you're using the official repository
-- Never share your keystore or password files
 - Keep your recovered keypair secure
 
 ### Do I need technical knowledge to use this?
@@ -27,7 +26,7 @@ Then you can use this tool.
 ---
 
 ### Will this work with the current Solflare wallet?
-No, this tool is specifically for **legacy Solflare keystores** from [https://legacy.solflare.com](https://legacy.solflare.com). The modern Solflare wallet uses a different format. If you're using the current Solflare browser extension or mobile app, you don't need this tool.
+No, this tool is specifically for **legacy Solflare keystores**. The modern Solflare wallet uses a different format. If you're using the current Solflare browser extension or mobile app, you don't need this tool.
 
 ---
 
@@ -37,7 +36,7 @@ No, this tool is specifically for **legacy Solflare keystores** from [https://le
 A keystore file is an encrypted JSON file that contains your wallet's private key. The file is encrypted with your password, so both the file and the password are required to access your wallet.
 
 ### Where can I find my keystore file?
-Your keystore file should have been downloaded when you first created your legacy Solflare wallet, or you can download it from [https://legacy.solflare.com](https://legacy.solflare.com) by logging into your wallet and going to the settings/export section.
+Your keystore file should have been downloaded when you first created your legacy Solflare wallet, or you can download it from legacy Solflare by logging into your wallet and going to the settings/export section.
 
 ### What if I don't have my password?
 Unfortunately, without your password, there's no way to decrypt the keystore file. The encryption is designed to be secure, and there's no backdoor or recovery method if you've lost your password. This is a fundamental security feature of cryptocurrency wallets.
@@ -84,7 +83,7 @@ This file contains your unencrypted private key in JSON format. It's created dur
 Stake accounts are separate Solana accounts where you can delegate SOL to validators to earn staking rewards. In legacy Solflare, you may have created one or more stake accounts.
 
 ### How do I find my stake account addresses?
-When you log into [https://legacy.solflare.com](https://legacy.solflare.com), your stake accounts are listed in the "Your staking accounts" section. You can copy each address from there. See the screenshots in the README for reference.
+When you log into legacy Solflare, your stake accounts are listed in the "Your staking accounts" section. You can copy each address from there. See the screenshots in the README for reference.
 
 ### Can I withdraw staked SOL that's still locked?
 The tool will attempt to withdraw from your stake accounts, but if your SOL is in a "locked" or "activating" state due to the Solana staking schedule, you may need to wait until the unlock period completes before you can withdraw.
@@ -98,12 +97,6 @@ No, the tool lets you enter stake account addresses one at a time. You can choos
 
 For detailed troubleshooting of common errors and issues, see [TROUBLESHOOTING](TROUBLESHOOTING.md).
 
-Quick troubleshooting tips:
-- **Decryption failed**: Check your password is correct and has no extra spaces
-- **Connection errors**: Verify internet connection or try a different RPC URL
-- **Transaction failed**: Your funds are safe; transaction fees only apply to successful transactions
-- **File not found**: Ensure you're in the correct directory and files are named correctly
-
 ---
 
 ## Security Concerns
@@ -112,13 +105,6 @@ Quick troubleshooting tips:
 This is open-source software that you can review before running. All operations happen locally on your computer. However, you should always:
 - Download from the official GitHub repository
 - Review the code if you're able to
-- Never run modified versions from untrusted sources
-
-### What should I do with my keystore after recovery?
-After successfully recovering your funds, you should:
-- Keep your keystore file in secure, encrypted storage (or delete it if you've migrated completely)
-- Delete the `wallet-keypair.json` file (it contains your unencrypted private key)
-- Clear the `password.txt` file or store it separately in secure password management
 
 ### Is it safe to transfer all my funds at once?
 If you're transferring to a wallet you control and have verified the address, yes. However, you might want to:
@@ -162,7 +148,6 @@ You can use this tool as many times as needed, as long as you have your keystore
 ### Where can I get more help?
 - Check [TROUBLESHOOTING](TROUBLESHOOTING.md) for common issues
 - Open an issue on [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues)
-- Never share your private keys, keystore, or password when asking for help
 
 ### How can I contribute or report bugs?
 Visit the GitHub repository and:
@@ -172,7 +157,3 @@ Visit the GitHub repository and:
 
 ### Is there official support from Solflare?
 No, this is an independent community tool. For official Solflare support, visit **Solflare Documentation** - [https://docs.solflare.com](https://docs.solflare.com) or contact Solflare directly.
-
----
-
-**Didn't find your answer?** Open an issue on [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues) or check the documentation in the repository.
