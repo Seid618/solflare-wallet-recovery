@@ -4,7 +4,7 @@
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
-[![Version](https://img.shields.io/badge/version-1.1.0-orange)](package.json)
+[![Version](https://img.shields.io/badge/version-1.1.1-orange)](package.json)
 [![Security Audit](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml/badge.svg)](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
 
 ---
@@ -21,11 +21,6 @@
   - [Finding Your Addresses](#finding-your-addresses)
 - [Usage](#usage)
   - [Interactive Mode](#interactive-mode)
-- [Common Use Cases](#common-use-cases)
-  - [Scenario 1: Basic Wallet Recovery](#scenario-1-basic-wallet-recovery)
-  - [Scenario 2: Staked SOL Recovery](#scenario-2-staked-sol-recovery)
-  - [Scenario 3: Complete Migration](#scenario-3-complete-migration)
-  - [Scenario 4: Automated Recovery](#scenario-4-automated-recovery)
 - [Security](#security)
 - [Troubleshooting](#troubleshooting)
 - [Support & Contributing](#support--contributing)
@@ -234,52 +229,6 @@ node script.js --help
 
 ---
 
-## Common Use Cases
-
-### Scenario 1: Basic Wallet Recovery
-
-**Problem:** You have keystore and password but can't access [https://legacy.solflare.com](https://legacy.solflare.com)
-
-**Solution:**
-1. Run the tool with your files
-2. Check your balance
-3. Transfer funds to a new wallet
-
----
-
-### Scenario 2: Staked SOL Recovery
-
-**Problem:** SOL staked in old accounts that you need to withdraw
-
-**Solution:**
-1. Decrypt your keystore
-2. Enter stake account addresses
-3. Withdraw to your wallet or new address
-
----
-
-### Scenario 3: Complete Migration
-
-**Problem:** Moving everything to a new wallet
-
-**Solution:**
-1. Recover and decrypt keystore
-2. Withdraw all stake accounts
-3. Transfer total balance to new wallet
-
----
-
-### Scenario 4: Automated Recovery
-
-**Problem:** Need to script recovery process or batch operations
-
-**Solution:**
-1. Prepare all addresses and file paths
-2. Use CLI flags for non-interactive execution
-3. Integrate into automation tools/scripts
-
----
-
 ## Security
 
 > ⚠️ **CRITICAL: This tool handles sensitive cryptographic material (private keys).**
@@ -297,7 +246,7 @@ node script.js --help
 - ✅ Review all transaction addresses before confirming
 - ✅ Keep backups in secure locations
 
-**For comprehensive security information, dependency risks, and best practices, see [SECURITY.md](SECURITY.md)**
+**For comprehensive security information, dependency risks, and best practices, see [SECURITY](SECURITY.md)**
 
 ---
 
@@ -305,13 +254,13 @@ node script.js --help
 
 Having issues? Check these resources:
 
-- 📖 [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Common problems and solutions
+- 📖 [TROUBLESHOOTING](TROUBLESHOOTING.md) - Common problems and solutions
   - Decryption errors
   - Connection issues
   - Transaction failures
   - File format problems
 
-- ❓ [FAQ.md](FAQ.md) - Frequently asked questions
+- ❓ [FAQ](FAQ.md) - Frequently asked questions
 
 - 🐛 [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues) - Report bugs or ask for help
 
@@ -361,7 +310,7 @@ Contributions are welcome!
 
 The author is NOT responsible for loss of funds, vulnerabilities in dependencies, or issues with external services. You are responsible for auditing code, verifying transactions, and securing your keys.
 
-**For detailed disclaimers and security considerations, see [SECURITY.md](SECURITY.md)**
+**For detailed disclaimers and security considerations, see [SECURITY](SECURITY.md)**
 
 ---
 

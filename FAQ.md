@@ -96,7 +96,7 @@ No, the tool lets you enter stake account addresses one at a time. You can choos
 
 ## Troubleshooting
 
-For detailed troubleshooting of common errors and issues, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
+For detailed troubleshooting of common errors and issues, see [TROUBLESHOOTING](TROUBLESHOOTING.md).
 
 Quick troubleshooting tips:
 - **Decryption failed**: Check your password is correct and has no extra spaces
@@ -160,7 +160,7 @@ You can use this tool as many times as needed, as long as you have your keystore
 ## Getting Help
 
 ### Where can I get more help?
-- Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for common issues
+- Check [TROUBLESHOOTING](TROUBLESHOOTING.md) for common issues
 - Open an issue on [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues)
 - Never share your private keys, keystore, or password when asking for help
 
