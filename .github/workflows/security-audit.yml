@@ -1,0 +1,58 @@
+name: Security Audit
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: npm audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: |
+          echo "## 🔍 Security Audit Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # Run audit and capture output
+          if npm audit --audit-level=moderate; then
+            echo "✅ No vulnerabilities found at moderate or higher level" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Vulnerabilities detected" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            npm audit >> $GITHUB_STEP_SUMMARY 2>&1 || true
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+        continue-on-error: true
+
+      - name: Run detailed audit
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Detailed Audit" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          npm audit --json | jq -r '.metadata | "Critical: \(.vulnerabilities.critical // 0)\nHigh: \(.vulnerabilities.high // 0)\nModerate: \(.vulnerabilities.moderate // 0)\nLow: \(.vulnerabilities.low // 0)\nInfo: \(.vulnerabilities.info // 0)"' >> $GITHUB_STEP_SUMMARY 2>&1 || echo "Unable to parse audit data" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Check for vulnerabilities
+        run: |
+          # Fail if there are moderate or higher vulnerabilities
+          npm audit --audit-level=moderate
