@@ -45,7 +45,7 @@ This tool solves common problems with legacy Solflare wallets:
 
 - ✅ Locked out of legacy Solflare wallet
 - ✅ Can't access Solflare keystore file
-- ✅ Need to recover funds from [legacy.solflare.com](https://legacy.solflare.com)
+- ✅ Need to recover funds from [https://legacy.solflare.com](https://legacy.solflare.com)
 - ✅ Unable to withdraw staked SOL from old accounts
 - ✅ Migrating from legacy Solflare to modern wallet
 
@@ -88,7 +88,7 @@ This tool provides a complete recovery and retrieval solution:
 
 Before you begin, ensure you have:
 
-- **Node.js** v14.0.0 or higher ([Download](https://nodejs.org/))
+- **Node.js** v14.0.0 or higher - [https://nodejs.org/](https://nodejs.org/)
 - **Solflare keystore file** (`.json` format)
 - **Wallet password** (saved in a text file)
 
@@ -142,7 +142,7 @@ solflare-wallet-recovery/
 
 ### Finding Your Addresses
 
-Once logged into legacy.solflare.com, you can find:
+Once logged into [https://legacy.solflare.com](https://legacy.solflare.com), you can find:
 
 ![Solflare Wallet Dashboard](docs/copy-values.png)
 
@@ -238,7 +238,7 @@ node script.js --help
 
 ### Scenario 1: Basic Wallet Recovery
 
-**Problem:** You have keystore and password but can't access legacy.solflare.com
+**Problem:** You have keystore and password but can't access [https://legacy.solflare.com](https://legacy.solflare.com)
 
 **Solution:**
 1. Run the tool with your files
@@ -282,69 +282,22 @@ node script.js --help
 
 ## Security
 
-### Important Security Considerations
+> ⚠️ **CRITICAL: This tool handles sensitive cryptographic material (private keys).**
 
-| ⚠️ Warning | Details |
-|-----------|---------|
-| **Private Keys** | This tool handles sensitive cryptographic material |
-| **Verify Source** | Always verify you're using the official repository |
-| **Never Share** | Never share keystore, password, or generated `wallet-keypair.json` |
-| **Review Transactions** | Always review transaction details before confirming |
-| **Test First** | Consider testing with a small amount first |
-| **CLI Auto-Confirm** | When using `-y` flag, be extra careful with addresses |
-| **Backup** | Keep backups of keystore and password in secure locations |
+**Before using with real funds:**
+- Read the complete [Security Policy](SECURITY.md)
+- Review [automated security audit results](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
+- Understand the risks of external dependencies and RPC endpoints
+- Test with small amounts first
 
-### External Dependencies & Third-Party Risks
+**Quick Security Checklist:**
+- ✅ Verify you're using the official repository
+- ✅ Run `npm audit` locally before use
+- ✅ Never share your keystore or password
+- ✅ Review all transaction addresses before confirming
+- ✅ Keep backups in secure locations
 
-This tool relies on external dependencies and services that are outside the author's control:
-
-**npm Dependencies:**
-- `@solana/web3.js` - Solana blockchain interaction
-- `commander` - CLI argument parsing
-- `aes-js`, `pbkdf2`, `tweetnacl` - Cryptographic operations
-- `bs58`, `picocolors` - Utility functions
-
-**External Services:**
-- Solana RPC endpoints (default: `https://api.mainnet-beta.solana.com`)
-- GitHub for package distribution
-- npm registry for dependency installation
-
-**Important Disclaimers:**
-
-> ⚠️ **Dependency Vulnerabilities:** The author is not responsible for vulnerabilities in third-party dependencies. While efforts are made to use well-maintained packages, you should:
-> - Review all dependencies before using this tool with real funds
-> - Check for known vulnerabilities using `npm audit`
-> - Consider the security posture of each dependency
-> - Use at your own risk for any financial operations
-
-> ⚠️ **RPC Endpoint Risks:** When using public RPC endpoints:
-> - Your requests may be logged or monitored
-> - Service availability is not guaranteed
-> - Consider using a private RPC endpoint for sensitive operations
-> - Transaction data is transmitted to third-party servers
-
-> ⚠️ **Supply Chain Security:** Before using this tool:
-> - Verify you're using the official repository
-> - Review the source code yourself
-> - Check package signatures and integrity
-> - Consider running in an isolated environment for testing
-
-**Automated Security Monitoring:**
-
-This repository includes automated security auditing via GitHub Actions:
-- [![Security Audit](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml/badge.svg)](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
-- Runs `npm audit` on every push and pull request
-- Weekly scheduled scans to detect newly disclosed vulnerabilities
-- Check the [Actions tab](https://github.com/thijmau/solflare-wallet-recovery/actions) for detailed audit reports
-
-**Recommendations for Critical Operations:**
-1. Review the latest security audit results before use
-2. Run `npm audit` locally before using with real funds
-3. Audit the code and all dependencies yourself
-4. Use a dedicated machine with minimal software installed
-5. Use your own trusted/private Solana RPC endpoint for sensitive operations
-6. Test with small amounts first
-7. Keep this tool and its dependencies updated
+**For comprehensive security information, dependency risks, and best practices, see [SECURITY.md](SECURITY.md)**
 
 ---
 
@@ -390,37 +343,25 @@ Contributions are welcome!
 
 ### Related Resources
 
-- [Solflare Official Documentation](https://docs.solflare.com/)
-- [Solana Documentation](https://docs.solana.com/)
-- [Legacy Solflare Wallet](https://legacy.solflare.com)
+- **Solflare Documentation** - [https://docs.solflare.com/](https://docs.solflare.com/)
+- **Solana Documentation** - [https://docs.solana.com/](https://docs.solana.com/)
+- **Legacy Solflare Wallet** - [https://legacy.solflare.com](https://legacy.solflare.com)
 
 ---
 
 ## License
 
-**GPL-3.0 License** - See [LICENSE](LICENSE) file for details.
+**GPL-3.0 License** - [LICENSE](LICENSE)
 
 ---
 
 ## Disclaimer
 
-> **NO WARRANTY:** This software is provided "as is", without warranty of any kind, express or implied. Use at your own risk.
+> **NO WARRANTY:** This software is provided "as is", without warranty of any kind. Use at your own risk.
 
-**The author is NOT responsible for:**
-- Any loss of funds or assets
-- Vulnerabilities in third-party dependencies or services
-- Issues arising from external RPC endpoints or blockchain services
-- Security breaches in npm packages or supply chain attacks
-- Any damages resulting from the use or misuse of this software
+The author is NOT responsible for loss of funds, vulnerabilities in dependencies, or issues with external services. You are responsible for auditing code, verifying transactions, and securing your keys.
 
-**Your Responsibilities:**
-- Verify all transactions before confirming them
-- Audit the code and dependencies yourself
-- Understand the risks of using third-party services
-- Keep your keystore and passwords secure
-- Use appropriate security measures for your situation
-
-This tool handles sensitive cryptographic material. If you are uncomfortable with any aspect of its operation or dependencies, do not use it with real funds.
+**For detailed disclaimers and security considerations, see [SECURITY.md](SECURITY.md)**
 
 ---
 

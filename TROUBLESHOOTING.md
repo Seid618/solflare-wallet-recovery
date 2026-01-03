@@ -1,6 +1,8 @@
-# Troubleshooting
+# Troubleshooting Guide
 
 Common issues and solutions for the Solflare Wallet Recovery Tool.
+
+---
 
 ## "Keystore file not found"
 
@@ -57,7 +59,7 @@ Your recovered keypair is saved in `wallet-keypair.json`. You can use the offici
    ```bash
    sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
    ```
-   Or visit: https://docs.solana.com/cli/install-solana-cli-tools
+   Or visit: [https://docs.solana.com/cli/install-solana-cli-tools](https://docs.solana.com/cli/install-solana-cli-tools)
 
 2. **Check your balance:**
    ```bash
@@ -114,14 +116,14 @@ Your recovered keypair is saved in `wallet-keypair.json`. You can use the offici
 If your problem isn't listed here:
 
 1. **Check debug logs** - The tool outputs detailed debug information
-2. **Open an issue** on [GitHub](https://github.com/thijmau/solflare-wallet-recovery/issues)
+2. **Open an issue** on [GitHub Issues](https://github.com/thijmau/solflare-wallet-recovery/issues)
 3. **Important:** Never share your keystore file, password, or private keys when asking for help
 
 ## Security Reminder
 
-⚠️ If you've successfully recovered your keypair:
-- The `wallet-keypair.json` file contains your private key
-- Store it securely
-- Never share it
-- Consider transferring funds to a new, secure wallet
-- Delete sensitive files after successful recovery
+> ⚠️ **If you've successfully recovered your keypair:**
+> - The `wallet-keypair.json` file contains your private key
+> - Store it securely
+> - Never share it
+> - Consider transferring funds to a new, secure wallet
+> - Delete sensitive files after successful recovery
