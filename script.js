@@ -1,11 +1,13 @@
 const { program } = require('commander');
-const { LAMPORTS_PER_SOL } = require('@solana/web3.js');
-const { rl, debug, info, success, error } = require('./lib/utils');
+const { rl, debug, info, success, warn, error } = require('./lib/utils');
+const { Config } = require('./lib/config');
 const {
-    getInputFiles,
+    validateInputFiles,
     decryptAndCreateSigner,
     connectToSolana,
+    checkBalance,
     collectStakeAccounts,
+    displayTotalBalances,
     withdrawStakeAccounts,
     performFinalTransfer
 } = require('./lib/steps');
@@ -16,9 +18,11 @@ program
     .name('solflare-wallet-recovery')
     .description('A comprehensive tool for recovering and managing legacy Solflare wallet keystores')
     .version(packageJson.version)
-    .option('-k, --keystore <path>', 'path to keystore file', 'solflare-keystore.json')
-    .option('-p, --password <path>', 'path to password file', 'password.txt')
-    .option('-r, --rpc <url>', 'Solana RPC URL', 'https://api.mainnet-beta.solana.com')
+    .option('-k, --keystore <path>', 'path to keystore file (default: solflare-keystore.json)')
+    .option('-p, --password <text>', 'password as text (can use environment variables)')
+    .option('--password-file <path>', 'path to password file (alternative to -p)')
+    .option('--decrypt-only', 'only decrypt keystore and save keypair, skip blockchain operations', false)
+    .option('-r, --rpc <url>', 'Solana RPC URL (default: https://api.mainnet-beta.solana.com)')
     .option('-s, --stake-accounts <addresses...>', 'stake account addresses (space-separated)')
     .option('-w, --withdraw-to <address>', 'destination address for stake withdrawals (defaults to wallet)')
     .option('-t, --transfer-to <address>', 'final transfer destination address')
@@ -43,42 +47,59 @@ async function main(opts) {
     console.log('╚═════════════════════════════════════════════════════╝\n');
 
     try {
-        // Step 1: Get input files
-        const { keystorePath, passwordPath } = await getInputFiles(opts);
+        // Create configuration
+        const config = new Config(opts);
+
+        // Step 1: Validate input files
+        const { keystorePath, password } = await validateInputFiles(config);
 
         // Step 2: Decrypt and create signer
-        const { signer, publicKey } = await decryptAndCreateSigner(keystorePath, passwordPath);
+        const { signer } = decryptAndCreateSigner(keystorePath, password);
+
+        // If decrypt-only mode, exit here
+        if (opts.decryptOnly) {
+            success('╔═════════════════════════════════════════════════════╗');
+            success('║            DECRYPTION COMPLETE!                     ║');
+            success('╚═════════════════════════════════════════════════════╝\n');
+            info('Keypair has been decrypted and saved.');
+            info('Use the saved keypair for blockchain operations.\n');
+            return;
+        }
 
         // Step 3: Connect to Solana
-        const connection = await connectToSolana(opts);
+        const connection = await connectToSolana(config);
 
         // Step 4: Check wallet balance
-        info('━━━ Step 4: Checking Balances ━━━\n');
-        const walletBalance = await connection.getBalance(signer.publicKey);
-        info('Wallet Balance:', walletBalance / LAMPORTS_PER_SOL, 'SOL');
-        info('Wallet Address:', signer.publicKey.toString());
-        debug('Wallet balance in lamports:', walletBalance);
+        const walletBalance = await checkBalance(connection, signer);
 
         // Step 5: Collect stake accounts
-        const stakeAccounts = await collectStakeAccounts(connection, opts);
+        const stakeAccounts = await collectStakeAccounts(connection, config);
 
         // Display total balances
-        const totalStakeBalance = stakeAccounts.reduce((sum, acc) => sum + acc.balance, 0);
-        const totalBalance = walletBalance + totalStakeBalance;
-        info('\n━━━ Total Balances ━━━');
-        info('  Wallet:', walletBalance / LAMPORTS_PER_SOL, 'SOL');
-        info('  Stake Accounts:', totalStakeBalance / LAMPORTS_PER_SOL, 'SOL');
-        info('  Total:', totalBalance / LAMPORTS_PER_SOL, 'SOL\n');
+        displayTotalBalances(walletBalance, stakeAccounts);
 
         // Step 6: Withdraw stake accounts
-        await withdrawStakeAccounts(connection, signer, stakeAccounts, opts);
+        const withdrawSuccess = await withdrawStakeAccounts(connection, signer, stakeAccounts, config);
 
         // Step 7: Final transfer
-        await performFinalTransfer(connection, signer, opts);
+        const transferSuccess = await performFinalTransfer(connection, signer, config);
 
-        success('╔═════════════════════════════════════════════════════╗');
-        success('║                RECOVERY COMPLETE!                   ║');
-        success('╚═════════════════════════════════════════════════════╝\n');
+        // Display completion message based on success/failure
+        if (withdrawSuccess && transferSuccess) {
+            success('╔═════════════════════════════════════════════════════╗');
+            success('║                RECOVERY COMPLETE!                   ║');
+            success('╚═════════════════════════════════════════════════════╝\n');
+        } else {
+            warn('╔═════════════════════════════════════════════════════╗');
+            warn('║         RECOVERY COMPLETED WITH ERRORS              ║');
+            warn('╚═════════════════════════════════════════════════════╝\n');
+            if (!withdrawSuccess) {
+                error('Some stake withdrawals failed. Check errors above.');
+            }
+            if (!transferSuccess) {
+                error('Final transfer failed. Check error above.\n');
+            }
+        }
 
         // Display tips (unless --no-tips flag is set)
         if (opts.tips !== false) {

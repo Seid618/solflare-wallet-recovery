@@ -52,11 +52,28 @@ This tool is designed for keystore files specifically. If you only have your see
 ## Usage Questions
 
 ### What files do I need before running the tool?
-You need two files:
+You need:
 1. Your Solflare keystore file (usually named something like `solflare-keystore.json`)
-2. Your wallet password saved in a text file (e.g., `password.txt`)
+2. Your wallet password (either as text via `-p` flag, from environment variable, or saved in a text file)
 
-See the README for detailed instructions on where to place these files.
+See the README for detailed instructions on different password input methods.
+
+### Can I use environment variables for my password?
+Yes! You can pass your password directly via the `-p` flag which supports environment variables:
+```bash
+export WALLET_PASSWORD="your-password"
+node script.js -p "$WALLET_PASSWORD"
+```
+This is more secure than storing passwords in files for automated workflows.
+
+### What is decrypt-only mode?
+Decrypt-only mode (`--decrypt-only` flag) allows you to quickly decrypt your keystore and save the keypair without connecting to the blockchain. This is useful when:
+- You just want to verify your password works
+- You need offline decryption (no internet required)
+- You want to quickly extract the keypair for use elsewhere
+- You're testing the tool
+
+Example: `node script.js -p "$PASSWORD" --decrypt-only`
 
 ### Can I recover my wallet without transferring funds?
 Yes! The tool has multiple steps, and you can stop at any point. You can simply decrypt your keystore to verify access without making any transactions. All fund transfers are optional and require your confirmation.
@@ -68,6 +85,21 @@ The decryption itself is nearly instant. The overall time depends on:
 - How quickly you confirm each step
 
 Typically, a simple recovery and transfer takes 2-5 minutes.
+
+### What happens if an operation fails?
+The tool tracks success/failure of each operation:
+- If stake withdrawals fail, it continues with remaining accounts and reports which failed
+- If the final transfer fails, the error is clearly shown
+- At completion, you'll see either:
+  - "RECOVERY COMPLETE!" (all operations succeeded)
+  - "RECOVERY COMPLETED WITH ERRORS" (wallet decrypted, but some transfers failed)
+
+**Important:** "COMPLETED WITH ERRORS" means your wallet was successfully decrypted and the keypair was saved to `wallet-keypair.json`. The decryption (the hardest part) worked! You can:
+- Import the keypair into another wallet (Phantom, Solflare, etc.)
+- Manually retry failed transfers using the saved keypair
+- Use the Solana CLI with your recovered keypair
+
+Failed operations don't stop the entire process - you'll see exactly what succeeded and what failed.
 
 ### Do I need to pay any fees?
 Yes, you'll pay standard Solana network transaction fees (typically 0.000005 SOL per transaction). The tool will automatically calculate and reserve fees when transferring funds. There are no additional fees charged by this tool.

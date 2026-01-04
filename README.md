@@ -4,7 +4,7 @@
 
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-blue.svg)](LICENSE)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
-[![Version](https://img.shields.io/badge/version-1.1.2-orange)](package.json)
+[![Version](https://img.shields.io/badge/version-1.2.0-orange)](package.json)
 [![Security Audit](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml/badge.svg)](https://github.com/thijmau/solflare-wallet-recovery/actions/workflows/security-audit.yml)
 
 ---
@@ -14,20 +14,10 @@
 - [Overview](#overview)
 - [Quick Start](#quick-start)
 - [Features](#features)
-- [Prerequisites](#prerequisites)
 - [Setup](#setup)
-  - [Getting Your Keystore and Password](#getting-your-keystore-and-password)
-  - [Finding Your Addresses](#finding-your-addresses)
 - [Usage](#usage)
-  - [Interactive Mode](#interactive-mode)
 - [Security](#security)
-- [Troubleshooting](#troubleshooting)
-- [Support & Contributing](#support--contributing)
-  - [Support This Project](#support-this-project)
-  - [Contributing](#contributing)
-  - [Related Resources](#related-resources)
-- [License](#license)
-- [Disclaimer](#disclaimer)
+- [Support](#support--contributing)
 
 ---
 
@@ -53,12 +43,17 @@ git clone https://github.com/thijmau/solflare-wallet-recovery.git
 cd solflare-wallet-recovery
 npm install
 
-# 2. Place your files in the project root
-# - solflare-keystore.json
-# - password.txt
+# 2. Prepare your keystore file
+# Place solflare-keystore.json in the project root
 
-# 3. Run the tool
+# 3. Run the tool (interactive mode)
 npm start
+
+# Or with password from environment variable (single-shot)
+node script.js -p "$PASSWORD"
+
+# Or with password file
+node script.js --password-file password.txt
 ```
 
 ---
@@ -67,14 +62,16 @@ npm start
 
 This tool provides a complete recovery and retrieval solution:
 
-| Feature | Description |
-|---------|-------------|
-| **Keystore Decryption** | Decrypt legacy Solflare keystore files using your password |
-| **Balance Checking** | View wallet and stake account balances |
-| **Stake Withdrawal** | Unstake and withdraw SOL from multiple stake accounts |
-| **Fund Transfer** | Transfer recovered funds to a new wallet |
-| **CLI Automation** | Scriptable with command-line flags for batch recovery |
-| **Interactive Mode** | Step-by-step guided recovery process |
+| Feature                   | Description                                                |
+| ------------------------- | ---------------------------------------------------------- |
+| **Keystore Decryption**   | Decrypt legacy Solflare keystore files using your password |
+| **Decrypt-Only Mode**     | Fast, offline decryption without blockchain operations     |
+| **Balance Checking**      | View wallet and stake account balances                     |
+| **Stake Withdrawal**      | Unstake and withdraw SOL from multiple stake accounts      |
+| **Fund Transfer**         | Transfer recovered funds to a new wallet                   |
+| **Environment Variables** | Pass passwords securely via environment variables          |
+| **CLI Automation**        | Scriptable with command-line flags for batch recovery      |
+| **Interactive Mode**      | Step-by-step guided recovery process                       |
 
 ---
 
@@ -154,6 +151,17 @@ node script.js
 6. **Withdrawals** - Optionally withdraw from stake accounts
 7. **Transfer** - Optionally transfer all funds to new wallet
 
+> **Note:** The tool provides detailed logging with color-coded output:
+> - `[DEBUG]` (gray) - Diagnostic information
+> - `[INFO]` (blue) - General information
+> - `[SUCCESS]` (green) - Successful operations
+> - `[WARN]` (yellow) - Warnings and partial failures
+> - `[ERROR]` (red) - Errors
+>
+> **Completion Messages:**
+> - "RECOVERY COMPLETE!" - All operations succeeded
+> - "RECOVERY COMPLETED WITH ERRORS" - Wallet decrypted successfully, but some transfers failed (you may need to transfer manually using the saved keypair)
+
 <details>
 <summary><strong>Advanced: CLI Flags (Non-Interactive Mode)</strong></summary>
 
@@ -168,42 +176,65 @@ node script.js [options]
 
 #### Available Options
 
-| Flag | Description | Default |
-|------|-------------|---------|
-| `-k, --keystore <path>` | Path to keystore file | `solflare-keystore.json` |
-| `-p, --password <path>` | Path to password file | `password.txt` |
-| `-r, --rpc <url>` | Solana RPC URL | `https://api.mainnet-beta.solana.com` |
-| `-s, --stake-accounts <addresses...>` | Stake account addresses (space-separated) | - |
-| `-w, --withdraw-to <address>` | Destination for stake withdrawals | Current wallet |
-| `-t, --transfer-to <address>` | Final transfer destination | - |
-| `-y, --yes` | Auto-confirm all prompts | `false` |
-| `--no-tips` | Hide tips message | - |
-| `-V, --version` | Show version number | - |
-| `-h, --help` | Display help | - |
+| Flag                                  | Description                                       | Default                               |
+| ------------------------------------- | ------------------------------------------------- | ------------------------------------- |
+| `-k, --keystore <path>`               | Path to keystore file                             | `solflare-keystore.json`              |
+| `-p, --password <text>`               | Password as text (supports env variables)         | -                                     |
+| `--password-file <path>`              | Path to password file (alternative to `-p`)       | -                                     |
+| `--decrypt-only`                      | Only decrypt keystore, skip blockchain operations | `false`                               |
+| `-r, --rpc <url>`                     | Solana RPC URL                                    | `https://api.mainnet-beta.solana.com` |
+| `-s, --stake-accounts <addresses...>` | Stake account addresses (space-separated)         | -                                     |
+| `-w, --withdraw-to <address>`         | Destination for stake withdrawals                 | Current wallet                        |
+| `-t, --transfer-to <address>`         | Final transfer destination                        | -                                     |
+| `-y, --yes`                           | Auto-confirm all prompts                          | `false`                               |
+| `--no-tips`                           | Hide tips message                                 | -                                     |
+| `-V, --version`                       | Show version number                               | -                                     |
+| `-h, --help`                          | Display help                                      | -                                     |
 
 #### Examples
 
-**Custom file paths:**
+**Decrypt-only mode (fast, offline, no RPC connection):**
 ```bash
-node script.js -k ./my-keystore.json -p ./my-password.txt
+# With password as text
+node script.js -p "mypassword" --decrypt-only
+
+# With environment variable
+node script.js -p "$PASSWORD" --decrypt-only
+
+# With password file
+node script.js --password-file password.txt --decrypt-only
+```
+
+**Password from environment variable (single-shot mode):**
+```bash
+export WALLET_PASSWORD="your-password-here"
+node script.js -p "$WALLET_PASSWORD"
+```
+
+**Custom keystore with environment variable (recommended):**
+```bash
+export PASSWORD="your-password"
+node script.js -k ./my-keystore.json -p "$PASSWORD"
+```
+
+**Password from file (traditional method):**
+```bash
+node script.js -k ./custom-keystore.json --password-file ./my-password.txt
 ```
 
 **Fully automated recovery:**
 ```bash
+# Multi-line (Unix/Linux/Mac - use backslash)
 node script.js \
   -k solflare-keystore.json \
-  -p password.txt \
-  -r https://api.mainnet-beta.solana.com \
+  -p "$PASSWORD" \
   -s StakeAccount1111111111111111111111111111111 StakeAccount2222222222222222222222222222222 \
   -w DestinationWallet111111111111111111111111111 \
   -t FinalWallet11111111111111111111111111111111111 \
-  -y \
-  --no-tips
-```
+  -y --no-tips
 
-**Check balance only:**
-```bash
-node script.js -k keystore.json -p password.txt
+# Single-line (works everywhere)
+node script.js -k solflare-keystore.json -p "$PASSWORD" -s StakeAccount1111111111111111111111111111111 StakeAccount2222222222222222222222222222222 -w DestinationWallet111111111111111111111111111 -t FinalWallet11111111111111111111111111111111111 -y --no-tips
 ```
 
 **Display help:**
@@ -248,11 +279,11 @@ Having issues? Check these resources:
 
 If this tool helped you recover your funds, consider supporting the development:
 
-| Currency | Address |
-|----------|---------|
-| **Bitcoin (BTC)** | `bc1qj24nen3z3en5n89eqg3dsh37cgjytmdqjsehq5` |
-| **Ethereum (ETH)** | `0xd4e249a6aeda20e318922ea448992df26d23bc3d` |
-| **Solana (SOL)** | `9cz2vBNaS9ZKnXzyLM1D7HjF1p9gwH4mYXamDpRg3UWN` |
+| Currency           | Address                                        |
+| ------------------ | ---------------------------------------------- |
+| **Bitcoin (BTC)**  | `bc1qj24nen3z3en5n89eqg3dsh37cgjytmdqjsehq5`   |
+| **Ethereum (ETH)** | `0xd4e249a6aeda20e318922ea448992df26d23bc3d`   |
+| **Solana (SOL)**   | `9cz2vBNaS9ZKnXzyLM1D7HjF1p9gwH4mYXamDpRg3UWN` |
 
 *Tips appreciated but never required. This tool is free and open source.*
 
