@@ -14,7 +14,7 @@
 - [Overview](#overview)
 - [Quick Start](#quick-start)
 - [Features](#features)
-- [Setup](#setup)
+- [Detailed Setup Guide](#detailed-setup-guide)
 - [Usage](#usage)
 - [Security](#security)
 - [Support](#support--contributing)
@@ -43,17 +43,11 @@ git clone https://github.com/thijmau/solflare-wallet-recovery.git
 cd solflare-wallet-recovery
 npm install
 
-# 2. Prepare your keystore file
-# Place solflare-keystore.json in the project root
+# 2. Prepare your files
+# Place solflare-keystore.json and password.txt in the project root
 
-# 3. Run the tool (interactive mode)
+# 3. Run the tool
 npm start
-
-# Or with password from environment variable (single-shot)
-node script.js -p "$PASSWORD"
-
-# Or with password file
-node script.js --password-file password.txt
 ```
 
 ---
@@ -85,7 +79,7 @@ Before you begin, ensure you have:
 
 ---
 
-## Setup
+## Detailed Setup Guide
 
 ### Getting Your Keystore and Password
 
@@ -138,8 +132,6 @@ The default mode guides you through each step with prompts.
 **Start the tool:**
 ```bash
 npm start
-# or
-node script.js
 ```
 
 **Process flow:**
@@ -195,36 +187,22 @@ node script.js [options]
 
 **Decrypt-only mode (fast, offline, no RPC connection):**
 ```bash
-# With password as text
-node script.js -p "mypassword" --decrypt-only
-
-# With environment variable
-node script.js -p "$PASSWORD" --decrypt-only
-
-# With password file
 node script.js --password-file password.txt --decrypt-only
 ```
 
-**Password from environment variable (single-shot mode):**
-```bash
-export WALLET_PASSWORD="your-password-here"
-node script.js -p "$WALLET_PASSWORD"
-```
-
-**Custom keystore with environment variable (recommended):**
+**Password from environment variable:**
 ```bash
 export PASSWORD="your-password"
-node script.js -k ./my-keystore.json -p "$PASSWORD"
+node script.js -p "$PASSWORD"
 ```
 
-**Password from file (traditional method):**
+**Custom keystore location:**
 ```bash
-node script.js -k ./custom-keystore.json --password-file ./my-password.txt
+node script.js -k ./my-keystore.json --password-file ./my-password.txt
 ```
 
 **Fully automated recovery:**
 ```bash
-# Multi-line (Unix/Linux/Mac - use backslash)
 node script.js \
   -k solflare-keystore.json \
   -p "$PASSWORD" \
@@ -232,9 +210,6 @@ node script.js \
   -w DestinationWallet111111111111111111111111111 \
   -t FinalWallet11111111111111111111111111111111111 \
   -y --no-tips
-
-# Single-line (works everywhere)
-node script.js -k solflare-keystore.json -p "$PASSWORD" -s StakeAccount1111111111111111111111111111111 StakeAccount2222222222222222222222222222222 -w DestinationWallet111111111111111111111111111 -t FinalWallet11111111111111111111111111111111111 -y --no-tips
 ```
 
 **Display help:**
@@ -320,6 +295,6 @@ The author is NOT responsible for loss of funds, vulnerabilities in dependencies
 
 **Star this repo if it helped you recover your funds!**
 
-Made by [Thijmen Maus](https://thijmau.dev)
+Made with ❤️ by [Thijmen Maus](https://thijmau.dev)
 
 </div>
