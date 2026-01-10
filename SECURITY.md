@@ -132,7 +132,7 @@ Before using this tool with significant funds:
 
 4. **Network Security**
    - Use your own trusted/private Solana RPC endpoint for sensitive operations
-   - Consider using a VPN or Tor for additional privacy
+   - Consider using a VPN for additional privacy
    - Be aware that RPC requests are not encrypted end-to-end
 
 5. **Operational Security**
@@ -171,24 +171,3 @@ This tool:
 - Understand the risks of third-party services and verify all transactions
 
 **This tool handles sensitive cryptographic material. If you are uncomfortable with any aspect of its operation or dependencies, do not use it with real funds.**
-
----
-
-## Security Best Practices
-
-### For Users
-
-1. **Verify Downloads**: Always clone from the official GitHub repository
-2. **Check Checksums**: Verify package integrity after installation
-3. **Stay Updated**: Keep the tool and dependencies updated
-4. **Minimize Risk**: Test with small amounts before full recovery
-5. **Secure Environment**: Use a clean, dedicated machine when possible
-
-### For Developers
-
-1. **Dependency Auditing**: Run `npm audit` before each release
-2. **Code Review**: Review all changes that touch cryptographic operations
-3. **Update Dependencies**: Keep dependencies updated for security patches
-4. **No Secrets**: Never commit private keys, passwords, or sensitive data
-5. **Security Scanning**: Monitor GitHub security alerts
-
